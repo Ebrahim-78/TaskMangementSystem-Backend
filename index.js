@@ -23,6 +23,7 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
+
 // User routes
 
 // Signup
