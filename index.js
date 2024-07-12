@@ -11,7 +11,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// Middleware to authenticate and authorize JWT tokens
+// Middleware && authenticate && authorize JWT tokens
 const authenticateToken = (req, res, next) => {
   const token = req.headers['authorization'];
   if (!token) return res.sendStatus(401);
@@ -23,9 +23,7 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-
 // User routes
-
 // Signup
 app.post('/signup', async (req, res) => {
   const { email, password } = req.body;
@@ -144,9 +142,11 @@ app.post('/tasks', authenticateToken, async (req, res) => {
     });
     res.status(201).json(task);
   } catch (error) {
+    console.error('Error creating task:', error);
     res.status(500).json({ error: 'An error occurred while creating the task' });
   }
 });
+
 
 // Get all tasks
 app.get('/tasks', authenticateToken, async (req, res) => {
